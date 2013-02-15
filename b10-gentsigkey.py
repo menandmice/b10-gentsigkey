@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# Copyright (C) 2013  Internet Systems Consortium, Inc. ("ISC")
 # Copyright (C) 2013  Men & Mice
 #
 # Permission to use, copy, modify, and/or distribute this software for any
@@ -13,6 +12,11 @@
 # LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
 # OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
+
+"""
+b10-gentsigkey is a simple tool to create TSIG keys (used to secure dynamic
+updates and zone-transfers) for the BIND 10 DNS server (http://bind10.isc.org)
+"""
 
 import os
 import sys

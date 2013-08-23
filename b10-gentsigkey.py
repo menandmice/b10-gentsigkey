@@ -28,9 +28,9 @@ from optparse import OptionParser
 if __name__ == "__main__":
     parser = OptionParser(usage="Usage: %prog [--help | options] name")
     parser.add_option("-a", "--algorithm", dest="algorithm", default="hmac-md5",
-                      choices=['hmac-md5', 'hmac-sha1', 'hmac-sha224', 'hmac-sha256', 'hmac-sha384', 'hmac-sha512'],
+                      choices=['hmac-md5', 'HMAC-MD5.SIG-ALG.REG.INT', 'hmac-sha1', 'hmac-sha224', 'hmac-sha256', 'hmac-sha384', 'hmac-sha512'],
                       help="algorithm for the TSIG key")
-    parser.add_option("-b", "--bytes", dest="size", default="128", type="int", 
+    parser.add_option("-b", "--bits", dest="size", default="128", type="int", 
                       help="size of the key")
     parser.add_option("-f", action="store_true", dest="bindctlformat", default=False, help="print bindctl CLI command")
     (options, args) = parser.parse_args()
@@ -38,8 +38,10 @@ if __name__ == "__main__":
         parser.error("you must supply a name for the key")
     randomtext = os.urandom(int(int(options.size)/8))
     tsigsecret = base64.b64encode(randomtext).decode("utf-8")
+    if (options.algorithm == "hmac-md5"):
+        options.algorithm = "HMAC-MD5.SIG-ALG.REG.INT"
     keystring = (args[0].lower()+":"+tsigsecret+":"+options.algorithm)
     if (options.bindctlformat):
-        print ('config add tsig_keys/keys "' + keystring + '"')
+        print ('config add tsig_keys/keys "' + keystring + '"\nconfig commit\n')
     else:
         print(keystring)

@@ -16,7 +16,7 @@ Options:
  -h, --help              show this help message and exit
  -a ALGORITHM, --algorithm=ALGORITHM
                          algorithm for the TSIG key
- -b SIZE, --bytes=SIZE
+ -b SIZE, --bits=SIZE
                          size of the key
  -f                      print bindctl CLI command
 ```
